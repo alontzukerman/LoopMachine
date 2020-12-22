@@ -1,0 +1,37 @@
+.App {
+  text-align: center;
+  background-color: rgb(139, 82, 82);
+}
+
+@keyframes backgroundDancing {
+  0% {
+    background-color: rgb(110, 126, 214);
+    clip-path: inset(0% 0% 0% 0%);
+  }
+  20% {
+    background-color: rgb(138, 110, 214);
+  }
+  25% {
+    clip-path: inset(5% 5% 5% 5%);
+  }
+  35% {
+    background-color: rgb(214, 110, 110);
+  }
+  50% {
+    background-color: rgb(214, 181, 110);
+    clip-path: inset(0% 0% 0% 0%);
+  }
+  65% {
+    background-color: rgb(214, 212, 110);
+  }
+  75% {
+    clip-path: inset(5% 5% 5% 5%);
+  }
+  80% {
+    background-color: rgb(110, 214, 124);
+  }
+  100% {
+    background-color: rgb(110, 126, 214);
+    clip-path: inset(0% 0% 0% 0%);
+  }
+}
