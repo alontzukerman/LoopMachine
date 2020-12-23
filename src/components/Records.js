@@ -31,6 +31,7 @@ function Records() {
 
 const RecordsContainer = styled.div`
   background-color: rgba(100, 100, 100, 0.6);
+  box-shadow: 0 0 3px 1px rgba(50,50,50,0.5);
   color: #f9f9f9 ;
   position: absolute;
   top: 0;
