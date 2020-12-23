@@ -7,6 +7,33 @@ import tanggu from "./GrooveB_120bpm_Tanggu.mp3";
 import maze_politics from "./MazePolitics_120_Perc.mp3";
 import pase_groove from "./PAS3GROOVE1.03B.mp3";
 import silent_star from "./SilentStar_120_Em_OrganSynth.mp3";
+// var glob = require("glob");
+// import glob from 'glob';
+// // options is optional
+// glob("*/.mp3", function (er, files) {
+//   console.log(files);
+//   // files is an array of filenames.
+//   // If the `nonull` option is set, and nothing
+//   // was found, then files is ["*/.js"]
+//   // er is an error object or null.
+// });
+// import listReactFiles from 'list-react-files'
+
+// listReactFiles('./').then(files => console.log(files))
+
+// Import library
+import ReactDynamicImport from "react-dynamic-import";
+// or const ReactDynamicImport = require('react-dynamic-import');
+ 
+/**
+ * Define dynamic import loader function
+ *
+ * This loads specific module from many available
+ * modules in the directory, using given module name
+ */
+const loader = f => import(`./120_future_funk_beats_25.mp3`);
+console.log(loader);
+// const loader = f => import(`./dynamic/${f}.js`);
 export const files = [
   future_funk,
   stutter_break,

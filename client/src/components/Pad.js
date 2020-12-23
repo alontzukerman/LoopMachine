@@ -4,21 +4,25 @@ import { TimeInSeconds } from "../context";
 import { eventBus } from "../EventBus";
 
 function Pad({ isPlaying, audioFile }) {
+  // console.log(audioFile);
   const [isOn, setIsOn] = useState(false); // pad indicator
   const audioEl = useRef(null); // audio element
 
-  const time = useContext(TimeInSeconds); // global timer 
-  useEffect(() => { // load audio element 
+  const time = useContext(TimeInSeconds); // global timer
+  useEffect(() => {
+    // load audio element
     audioEl.current.load();
     audioEl.current.loop = true;
   }, []);
-  useEffect(() => { 
-    eventBus.on("resetPads", () => { // reset pads when gets this event
+  useEffect(() => {
+    eventBus.on("resetPads", () => {
+      // reset pads when gets this event
       setIsOn(false);
     });
-    eventBus.on("setPadsOn", ({message}) => { // set pads status
+    eventBus.on("setPadsOn", ({ message }) => {
+      // set pads status
       setIsOn(message);
-    })
+    });
   }, []);
 
   useEffect(() => {
@@ -28,11 +32,11 @@ function Pad({ isPlaying, audioFile }) {
     } else {
       audioEl.current.pause();
     }
-  }, [isPlaying,isOn]);
-// switching pad status on click
-// play pad sync with other running pads.
-  const handleClick = () => { 
-    console.log(isOn);
+  }, [isPlaying, isOn]);
+  // switching pad status on click
+  // play pad sync with other running pads.
+  const handleClick = () => {
+    // console.log(isOn);
     if (!isPlaying) return setIsOn(!isOn);
     if (!isOn) {
       audioEl.current.currentTime = time.timeInSeconds;

@@ -5,18 +5,14 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import ControlPanel from "./components/ControlPanel";
 import { TimeInSeconds } from "./context";
-import { files } from './audio_files';  
+import { files } from "./audio_files";
+import Records from "./components/Records";
+import { eventBus } from "./EventBus";
 function App() {
   const [isPlaying, setIsPlaying] = useState(false); // play indicator
   const [timeInSeconds, setTimeInSeconds] = useState(0); // global timer in seconds
+  const [records, setRecords] = useState([]);
 
-  console.log(isPlaying);
-  console.log(timeInSeconds);
-  // useEffect(() => {
-  //   promiseFiles.then((file) => {
-  //     console.log(file);
-  //   });
-  // }, []);
   useEffect(() => {
     // running timer as long isPlaying is on
     if (isPlaying) {
@@ -26,6 +22,11 @@ function App() {
       return () => clearInterval(interval);
     } else return;
   });
+  // useEffect(() => {
+  //   eventBus.on("newRecord", ({ newRecord }) => {
+  //     setRecords([...records, newRecord]);
+  //   });
+  // }, []);
   return (
     <TimeInSeconds.Provider value={{ timeInSeconds, setTimeInSeconds }}>
       <StyledApp>
@@ -35,6 +36,7 @@ function App() {
             return <Pad isPlaying={isPlaying} audioFile={file} key={i} />;
           })}
         </StyledPadsContainer>
+        <Records records={records} />
         <ControlPanel handleState={(bool) => setIsPlaying(bool)} />
       </StyledApp>
     </TimeInSeconds.Provider>
@@ -47,6 +49,7 @@ const StyledApp = styled.div`
   width: 100vw;
   position: relative;
   overflow-y: hidden;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -69,7 +72,7 @@ const Title = styled.h2`
   color: #f9f9f9;
   text-transform: uppercase;
   letter-spacing: 3px;
-  margin-bottom: 100px ;
+  margin: 50px 0;
 `;
 const StyledPadsContainer = styled.div`
   height: 400px;

@@ -2,100 +2,69 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { TimeInSeconds } from "../context";
 import RecordRTC, { StereoAudioRecorder, MediaStreamRecorder } from "recordrtc";
-import Recorder from "recorder-js";
+// import Recorder from "recorder-js";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import PauseIcon from "@material-ui/icons/Pause";
 import StopIcon from "@material-ui/icons/Stop";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import SentimentDissatisfiedRoundedIcon from '@material-ui/icons/SentimentDissatisfiedRounded';
-import SentimentSatisfiedRoundedIcon from '@material-ui/icons/SentimentSatisfiedRounded';
+import SentimentDissatisfiedRoundedIcon from "@material-ui/icons/SentimentDissatisfiedRounded";
+import SentimentSatisfiedRoundedIcon from "@material-ui/icons/SentimentSatisfiedRounded";
 import FiberManualRecordOutlinedIcon from "@material-ui/icons/FiberManualRecordOutlined";
+import FiberManualRecordTwoToneIcon from '@material-ui/icons/FiberManualRecordTwoTone';
 import { eventBus } from "../EventBus";
 import { Icon } from "@material-ui/core";
+import { useReactMediaRecorder } from "react-media-recorder";
+import Recorder from "../Recorder";
+// import Records from './Records';
 
 function ControlPanel({ handleState }) {
   const [start, setStart] = useState(false);
   const [toggle, setToggle] = useState(false);
-  const [recording, setRecording] = useState(false);
-  const [recorder, setRecorder] = useState(null);
-  const [lastRecord, setLastRecord] = useState(null);
-  // const [rec, setRec] = useState(null);
+  const [isRecording, setIsRecording] = useState(false);
+  const [record, setRecord] = useState(null);
+  // const [myRecords, setMyRecords] = useState([]);
+
   const recordRef = useRef(null);
 
   const time = useContext(TimeInSeconds);
-
-  // const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-  // const recorder = new Recorder(audioContext, {
-  //   // An array of 255 Numbers
-  //   // You can use this to visualize the audio stream
-  //   // If you use react, check out react-wave-stream
-  //   onAnalysed: (data) => console.log(data),
-  // });
-
-  // let isRecording = false;
-  // let blob = null;
-
-  // navigator.mediaDevices
-  //   .getUserMedia({ audio: true })
-  //   .then((stream) => recorder.init(stream))
-  //   .catch((err) => console.log("Uh oh... unable to get stream...", err));
-
-  // function startRecording() {
-  //   recorder.start().then(() => (console.log("recording")));
-  // }
-
-  // function stopRecording() {
-  //   recorder.stop().then(({ blob, buffer }) => {
-  //     blob = blob;
-  //     console.log(blob);
-  //     // buffer is an AudioBuffer
-  //   });
-  // }
-
-  useEffect(() => {
-    navigator.mediaDevices
-      .getUserMedia({
-        audio: {
-          autoGainControl: true,
-          channelCount: 1,
-          deviceId: "default",
-          echoCancellation: true,
-        },
-        video: false,
-      })
-      // .getUserMedia({
-      //   audio: { echoCancellation: true },
-      //   video: true ,
-      // })
-      .then(async function (stream) {
-        window.stream = stream;
-        console.log(window.stream);
-        let recorder = RecordRTC(window.stream, {
-          type: "audio",
-          mimeType: "audio/webm",
-          ondataavailable: function (blob) {
-            console.log(blob);
-          },
-        });
-        setRecorder(recorder);
-      });
-  }, []);
-
+  const sendRecord = (blbUrl) => {
+    eventBus.remove("newRecord");
+  };
   const startRecord = () => {
-    recorder.startRecording();
+    let rec = null;
+    const constraints = { audio: true, video: true };
+    navigator.mediaDevices
+      .getDisplayMedia(constraints)
+      .then((stream) => {
+        const audioContext = new window.AudioContext();
+        const input = audioContext.createMediaStreamSource(stream);
+        rec = new Recorder(input, { numChannels: 1 });
+        // playSoundIn();
+        rec.record();
+        setRecord(rec);
+      })
+      .catch((err) => {
+        setIsRecording(false);
+        console.log(err);
+      });
   };
 
   const stopRecord = () => {
-    recorder.stopRecording(function () {
-      let blob = recorder.getBlob();
-      console.log(URL.createObjectURL(blob));
+    record.stop();
+    record.exportWAV((blob) => {
       let blobUrl = URL.createObjectURL(blob);
-      recordRef.current.src = blobUrl;
-      recordRef.current.play();
-      setLastRecord(blobUrl);
+      // console.log(blobUrl);
+      let date = Date.now();
+      let newRecord = { record: blobUrl, date: date };
+      eventBus.dispatch("newRecord", { newRecord });
+
+      // setMyRecords([...myRecords,blobUrl])
+      // recordRef.current.src = blobUrl ;
+      // recordRef.current.play();
     });
   };
+
   const handleClick = (bool) => {
     if (!bool && bool === start) {
       time.setTimeInSeconds(0);
@@ -108,19 +77,17 @@ function ControlPanel({ handleState }) {
   };
   const setAllPads = (bool) => {
     eventBus.dispatch("setPadsOn", { message: bool });
-  }
+  };
   const handleToggle = () => {
-    console.log(toggle);
+    // console.log(toggle);
     setToggle(!toggle);
   };
-  // const handleRecord = () => {
-  //   recording ? stopRecording() : startRecording();
-  //   setRecording(!recording);
-  // };
+
   const handleRecord = () => {
-    recording ? stopRecord() : startRecord();
-    setRecording(!recording);
+    isRecording ? stopRecord() : startRecord();
+    setIsRecording(!isRecording);
   };
+
   return (
     <StyledPanel toggle={toggle}>
       <TogglePanel onClick={() => handleToggle()}>
@@ -143,10 +110,17 @@ function ControlPanel({ handleState }) {
             <StopIcon fontSize="large" />
           </IconDiv>
           <IconDiv onClick={() => setAllPads(false)}>
-            <SentimentDissatisfiedRoundedIcon fontSize="large" />
+            <SentimentDissatisfiedRoundedIcon />
           </IconDiv>
           <IconDiv onClick={() => setAllPads(true)}>
-            <SentimentSatisfiedRoundedIcon fontSize="large" />
+            <SentimentSatisfiedRoundedIcon />
+          </IconDiv>
+          <IconDiv onClick={() => handleRecord()}>
+            {isRecording ? (
+              <FiberManualRecordTwoToneIcon />
+            ) : (
+              <FiberManualRecordOutlinedIcon  fontSize="small" />
+            )}
           </IconDiv>
         </StyledIcons>
         <Time>{`00:0${time.timeInSeconds.toFixed(0)}`}</Time>
@@ -170,6 +144,11 @@ const StyledPanel = styled.div`
   transition: transform 0.2s ease;
   transform: ${(props) =>
     props.toggle ? "translateY(0)" : "translateY(90px)"};
+  @media (max-width: 480px) {
+    & > div:nth-child(2) {
+      flex-direction: column-reverse ;
+    }
+  }
 `;
 
 const TogglePanel = styled.div`
@@ -193,8 +172,8 @@ const StyledIcons = styled.div`
 `;
 const IconDiv = styled.div`
   cursor: pointer;
-  height: 50px;
-  width: 50px;
+  height: 40px;
+  width: 40px;
   display: flex;
   background-color: rgb(139, 82, 82);
   border-radius: 50%;
@@ -202,26 +181,13 @@ const IconDiv = styled.div`
   justify-content: center;
   align-items: center;
   &:hover {
-    background-color: rgb(119, 53, 53) ;
-  }
-`;
-const Button = styled.button`
-  cursor: pointer;
-  border: 0;
-  width: 100px;
-  height: 100%;
-  font-weight: bold;
-  color: ${(props) => (props.recording ? "rgb(149, 25, 25)" : "black")};
-  background-color: ${(props) =>
-    props.on ? "rgb(139, 82, 82)" : "rgb(119, 45, 45)"};
-  &:focus {
-    outline: none;
+    background-color: rgb(119, 53, 53);
   }
 `;
 
 const Time = styled.div`
-height: 50px ;
-width: 150px ;
+  height: 40px;
+  width: 150px;
   font-size: 1.5em;
   font-weight: bold;
   letter-spacing: 5px;
