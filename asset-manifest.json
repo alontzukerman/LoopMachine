@@ -1,0 +1,32 @@
+{
+  "files": {
+    "main.css": "/LoopMachine/static/css/main.1a3bd965.chunk.css",
+    "main.js": "/LoopMachine/static/js/main.a5543297.chunk.js",
+    "main.js.map": "/LoopMachine/static/js/main.a5543297.chunk.js.map",
+    "runtime-main.js": "/LoopMachine/static/js/runtime-main.a3076dd5.js",
+    "runtime-main.js.map": "/LoopMachine/static/js/runtime-main.a3076dd5.js.map",
+    "static/js/2.87b33771.chunk.js": "/LoopMachine/static/js/2.87b33771.chunk.js",
+    "static/js/2.87b33771.chunk.js.map": "/LoopMachine/static/js/2.87b33771.chunk.js.map",
+    "static/js/3.e124f4e9.chunk.js": "/LoopMachine/static/js/3.e124f4e9.chunk.js",
+    "static/js/3.e124f4e9.chunk.js.map": "/LoopMachine/static/js/3.e124f4e9.chunk.js.map",
+    "index.html": "/LoopMachine/index.html",
+    "static/css/main.1a3bd965.chunk.css.map": "/LoopMachine/static/css/main.1a3bd965.chunk.css.map",
+    "static/js/2.87b33771.chunk.js.LICENSE.txt": "/LoopMachine/static/js/2.87b33771.chunk.js.LICENSE.txt",
+    "static/media/120_future_funk_beats_25.mp3": "/LoopMachine/static/media/120_future_funk_beats_25.5eb417fc.mp3",
+    "static/media/120_stutter_breakbeats_16.37c82282.mp3": "/LoopMachine/static/media/120_stutter_breakbeats_16.37c82282.mp3",
+    "static/media/Bass Warwick heavy funk groove on E 120 BPM.52c24c81.mp3": "/LoopMachine/static/media/Bass Warwick heavy funk groove on E 120 BPM.52c24c81.mp3",
+    "static/media/FUD_120_StompySlosh.27bdc145.mp3": "/LoopMachine/static/media/FUD_120_StompySlosh.27bdc145.mp3",
+    "static/media/GrooveB_120bpm_Tanggu.3e1411b4.mp3": "/LoopMachine/static/media/GrooveB_120bpm_Tanggu.3e1411b4.mp3",
+    "static/media/MazePolitics_120_Perc.2d08c654.mp3": "/LoopMachine/static/media/MazePolitics_120_Perc.2d08c654.mp3",
+    "static/media/PAS3GROOVE1.03B.f77c6da4.mp3": "/LoopMachine/static/media/PAS3GROOVE1.03B.f77c6da4.mp3",
+    "static/media/SilentStar_120_Em_OrganSynth.f2d668af.mp3": "/LoopMachine/static/media/SilentStar_120_Em_OrganSynth.f2d668af.mp3",
+    "static/media/electric guitar coutry slide 120bpm - B.230fcab8.mp3": "/LoopMachine/static/media/electric guitar coutry slide 120bpm - B.230fcab8.mp3",
+    "static/media/logo.6ce24c58.svg": "/LoopMachine/static/media/logo.6ce24c58.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a3076dd5.js",
+    "static/js/2.87b33771.chunk.js",
+    "static/css/main.1a3bd965.chunk.css",
+    "static/js/main.a5543297.chunk.js"
+  ]
+}
