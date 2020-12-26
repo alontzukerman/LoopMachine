@@ -1,18 +1,18 @@
 {
   "files": {
     "main.css": "/loopmachine/static/css/main.1a3bd965.chunk.css",
-    "main.js": "/loopmachine/static/js/main.a19dd9ff.chunk.js",
-    "main.js.map": "/loopmachine/static/js/main.a19dd9ff.chunk.js.map",
-    "runtime-main.js": "/loopmachine/static/js/runtime-main.05b5cd8e.js",
-    "runtime-main.js.map": "/loopmachine/static/js/runtime-main.05b5cd8e.js.map",
-    "static/js/2.d4837ffe.chunk.js": "/loopmachine/static/js/2.d4837ffe.chunk.js",
-    "static/js/2.d4837ffe.chunk.js.map": "/loopmachine/static/js/2.d4837ffe.chunk.js.map",
-    "static/js/3.73941554.chunk.js": "/loopmachine/static/js/3.73941554.chunk.js",
-    "static/js/3.73941554.chunk.js.map": "/loopmachine/static/js/3.73941554.chunk.js.map",
+    "main.js": "/loopmachine/static/js/main.cb08ee7d.chunk.js",
+    "main.js.map": "/loopmachine/static/js/main.cb08ee7d.chunk.js.map",
+    "runtime-main.js": "/loopmachine/static/js/runtime-main.2346e2f2.js",
+    "runtime-main.js.map": "/loopmachine/static/js/runtime-main.2346e2f2.js.map",
+    "static/js/2.447dc619.chunk.js": "/loopmachine/static/js/2.447dc619.chunk.js",
+    "static/js/2.447dc619.chunk.js.map": "/loopmachine/static/js/2.447dc619.chunk.js.map",
+    "static/js/3.949a8d04.chunk.js": "/loopmachine/static/js/3.949a8d04.chunk.js",
+    "static/js/3.949a8d04.chunk.js.map": "/loopmachine/static/js/3.949a8d04.chunk.js.map",
     "index.html": "/loopmachine/index.html",
     "static/css/main.1a3bd965.chunk.css.map": "/loopmachine/static/css/main.1a3bd965.chunk.css.map",
-    "static/js/2.d4837ffe.chunk.js.LICENSE.txt": "/loopmachine/static/js/2.d4837ffe.chunk.js.LICENSE.txt",
-    "static/media/120_future_funk_beats_25.mp3": "/loopmachine/static/media/120_future_funk_beats_25.5eb417fc.mp3",
+    "static/js/2.447dc619.chunk.js.LICENSE.txt": "/loopmachine/static/js/2.447dc619.chunk.js.LICENSE.txt",
+    "static/media/120_future_funk_beats_25.5eb417fc.mp3": "/loopmachine/static/media/120_future_funk_beats_25.5eb417fc.mp3",
     "static/media/120_stutter_breakbeats_16.37c82282.mp3": "/loopmachine/static/media/120_stutter_breakbeats_16.37c82282.mp3",
     "static/media/Bass Warwick heavy funk groove on E 120 BPM.52c24c81.mp3": "/loopmachine/static/media/Bass Warwick heavy funk groove on E 120 BPM.52c24c81.mp3",
     "static/media/FUD_120_StompySlosh.27bdc145.mp3": "/loopmachine/static/media/FUD_120_StompySlosh.27bdc145.mp3",
@@ -20,13 +20,12 @@
     "static/media/MazePolitics_120_Perc.2d08c654.mp3": "/loopmachine/static/media/MazePolitics_120_Perc.2d08c654.mp3",
     "static/media/PAS3GROOVE1.03B.f77c6da4.mp3": "/loopmachine/static/media/PAS3GROOVE1.03B.f77c6da4.mp3",
     "static/media/SilentStar_120_Em_OrganSynth.f2d668af.mp3": "/loopmachine/static/media/SilentStar_120_Em_OrganSynth.f2d668af.mp3",
-    "static/media/electric guitar coutry slide 120bpm - B.230fcab8.mp3": "/loopmachine/static/media/electric guitar coutry slide 120bpm - B.230fcab8.mp3",
-    "static/media/logo.6ce24c58.svg": "/loopmachine/static/media/logo.6ce24c58.svg"
+    "static/media/electric guitar coutry slide 120bpm - B.230fcab8.mp3": "/loopmachine/static/media/electric guitar coutry slide 120bpm - B.230fcab8.mp3"
   },
   "entrypoints": [
-    "static/js/runtime-main.05b5cd8e.js",
-    "static/js/2.d4837ffe.chunk.js",
+    "static/js/runtime-main.2346e2f2.js",
+    "static/js/2.447dc619.chunk.js",
     "static/css/main.1a3bd965.chunk.css",
-    "static/js/main.a19dd9ff.chunk.js"
+    "static/js/main.cb08ee7d.chunk.js"
   ]
 }
