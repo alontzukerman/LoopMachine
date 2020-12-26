@@ -1,8 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { TimeInSeconds } from "../context";
-import RecordRTC, { StereoAudioRecorder, MediaStreamRecorder } from "recordrtc";
-// import Recorder from "recorder-js";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import PauseIcon from "@material-ui/icons/Pause";
 import StopIcon from "@material-ui/icons/Stop";
@@ -13,25 +11,21 @@ import SentimentSatisfiedRoundedIcon from "@material-ui/icons/SentimentSatisfied
 import FiberManualRecordOutlinedIcon from "@material-ui/icons/FiberManualRecordOutlined";
 import FiberManualRecordTwoToneIcon from '@material-ui/icons/FiberManualRecordTwoTone';
 import { eventBus } from "../EventBus";
-import { Icon } from "@material-ui/core";
-import { useReactMediaRecorder } from "react-media-recorder";
 import Recorder from "../Recorder";
-// import Records from './Records';
 
 function ControlPanel({ handleState }) {
-  const [start, setStart] = useState(false);
-  const [toggle, setToggle] = useState(false);
-  const [isRecording, setIsRecording] = useState(false);
-  const [record, setRecord] = useState(null);
+  const [start, setStart] = useState(false); // on/off state
+  const [toggle, setToggle] = useState(false); // toggle control panel
+  const [isRecording, setIsRecording] = useState(false); // is recording on/off
+  const [record, setRecord] = useState(null); 
   // const [myRecords, setMyRecords] = useState([]);
 
-  const recordRef = useRef(null);
+  const recordRef = useRef(null); // record element ref
 
-  const time = useContext(TimeInSeconds);
-  const sendRecord = (blbUrl) => {
-    eventBus.remove("newRecord");
-  };
-  const startRecord = () => {
+  const time = useContext(TimeInSeconds); // get context
+
+  const startRecord = () => { // on start recording
+    // set settings
     let rec = null;
     const constraints = { audio: true, video: true };
     navigator.mediaDevices
@@ -39,9 +33,8 @@ function ControlPanel({ handleState }) {
       .then((stream) => {
         const audioContext = new window.AudioContext();
         const input = audioContext.createMediaStreamSource(stream);
-        rec = new Recorder(input, { numChannels: 1 });
-        // playSoundIn();
-        rec.record();
+        rec = new Recorder(input, { numChannels: 1 }); 
+        rec.record(); // start record
         setRecord(rec);
       })
       .catch((err) => {
@@ -50,40 +43,37 @@ function ControlPanel({ handleState }) {
       });
   };
 
-  const stopRecord = () => {
+  const stopRecord = () => { // on stop recording
     record.stop();
     record.exportWAV((blob) => {
       let blobUrl = URL.createObjectURL(blob);
       // console.log(blobUrl);
       let date = Date.now();
       let newRecord = { record: blobUrl, date: date };
-      eventBus.dispatch("newRecord", { newRecord });
+      eventBus.dispatch("newRecord", { newRecord }); // send new record 
 
-      // setMyRecords([...myRecords,blobUrl])
-      // recordRef.current.src = blobUrl ;
-      // recordRef.current.play();
     });
   };
 
-  const handleClick = (bool) => {
-    if (!bool && bool === start) {
+  const handleClick = (bool) => { // handle start,stop,reset 
+    if (!bool && bool === start) { // reset pads and time when pause and clicked reset
       time.setTimeInSeconds(0);
       eventBus.dispatch("resetPads", { message: "reset pads" });
     }
-    if (bool !== start) {
+    if (bool !== start) { // handle play and pause
       setStart(bool);
       handleState(bool);
     }
   };
-  const setAllPads = (bool) => {
+  const setAllPads = (bool) => { // send event to turn on/off all pads
     eventBus.dispatch("setPadsOn", { message: bool });
   };
-  const handleToggle = () => {
+  const handleToggle = () => { // handle toggle 
     // console.log(toggle);
     setToggle(!toggle);
   };
 
-  const handleRecord = () => {
+  const handleRecord = () => { // handle record button
     isRecording ? stopRecord() : startRecord();
     setIsRecording(!isRecording);
   };
@@ -129,6 +119,8 @@ function ControlPanel({ handleState }) {
     </StyledPanel>
   );
 }
+
+// styled components
 
 const StyledPanel = styled.div`
   height: 100px;

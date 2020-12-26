@@ -4,17 +4,16 @@ import { eventBus } from "../EventBus";
 import Record from "./Record";
 import SyncAltIcon from "@material-ui/icons/SyncAlt";
 function Records() {
-  const [records, setRecords] = useState([]);
-  const [openRecords, setOpenRecords] = useState(false);
-  console.log(records);
+  const [records, setRecords] = useState([]); // array of records
+  const [openRecords, setOpenRecords] = useState(false); // is display
   useEffect(() => {
-    eventBus.on("newRecord", ({ newRecord }) => {
+    eventBus.on("newRecord", ({ newRecord }) => { // waiting for new record
       console.log(newRecord);
 
-      setRecords([newRecord]);
+      setRecords([...records,newRecord]);
     });
   }, []);
-  const handleMenu = () => {
+  const handleMenu = () => { // change display state value
     setOpenRecords(!openRecords);
   };
   return (
@@ -29,6 +28,7 @@ function Records() {
   );
 }
 
+// styled components 
 const RecordsContainer = styled.div`
   background-color: rgba(100, 100, 100, 0.6);
   box-shadow: 0 0 3px 1px rgba(50,50,50,0.5);

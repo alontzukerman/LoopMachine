@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import Pad from "./components/Pad";
 import { useEffect, useState } from "react";
@@ -20,13 +19,9 @@ function App() {
         setTimeInSeconds((timeInSeconds + 0.01) % 8);
       }, 10);
       return () => clearInterval(interval);
-    } else return;
+    } else return ;
   });
-  // useEffect(() => {
-  //   eventBus.on("newRecord", ({ newRecord }) => {
-  //     setRecords([...records, newRecord]);
-  //   });
-  // }, []);
+
   return (
     <TimeInSeconds.Provider value={{ timeInSeconds, setTimeInSeconds }}>
       <StyledApp>
@@ -43,6 +38,8 @@ function App() {
   );
 }
 
+
+// styled components
 const StyledApp = styled.div`
   background-color: rgb(20, 20, 20);
   height: 100vh;

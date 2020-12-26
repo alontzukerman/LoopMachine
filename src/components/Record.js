@@ -3,22 +3,22 @@ import styled from "styled-components";
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 import PauseCircleOutlineIcon from "@material-ui/icons/PauseCircleOutline";
 function Record({ record }) {
-  const [on, setOn] = useState(false);
-  const audioEl = useRef(null);
+  const [on, setOn] = useState(false); // is record playing
+  const audioEl = useRef(null); // audio element ref
 
-  useEffect(() => {
+  useEffect(() => { // load and set loop setting
     audioEl.current.load();
     audioEl.current.loop = false;
   }, []);
 
-  const play = () => {
+  const play = () => { // play audio record on click
     audioEl.current.play();
   };
-  const stop = () => {
+  const stop = () => { // stop audio record on click
     audioEl.current.pause();
     audioEl.current.currentTime = 0;
   };
-  const handlePlay = () => {
+  const handlePlay = () => { // handle play & stop state
     on ? stop() : play();
     setOn(!on);
   };
@@ -32,6 +32,9 @@ function Record({ record }) {
     </RecordContainer>
   );
 }
+
+// styled components 
+
 const RecordContainer = styled.div`
   display: flex;
   padding: 10px;
